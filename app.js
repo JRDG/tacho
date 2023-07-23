@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const blogRouter = require("./routes/BlogRoutes");
+const path = require('path');
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use("/api/blogs", blogRouter);
 
 //configure mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/CRUD",
+  "mongodb+srv://joarod95:h4jZ02MhiATPwwP1@tachocluster.oyr3egu.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -25,9 +26,15 @@ mongoose.connect(
   }
 );
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+app.use(express.static(path.join(__dirname, 'front/tacho/dist/tacho')));
+
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 module.exports = app;

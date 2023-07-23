@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "cd ./front/tacho && ng build && cd .. && cd .. && node app.js",
     "test": "mocha --timeout 10000"
   },
   "keywords": [],
